@@ -1,16 +1,29 @@
 body {
-  background-color: #1e1e2f;
+  background-image: url("/static/images/harry_potter_background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
   color: #f0f0f0;
-  font-family: 'Georgia', serif;
-  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px #000;
 }
 
 .chat-container {
-  max-width: 600px;
-  margin: auto;
-  background-color: #2f2f4f;
+  background-color: rgba(47, 47, 79, 0.85);
+  max-width: 700px;
+  margin: 40px auto;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #00000088;
 }
 
 #chatbox {
@@ -20,15 +33,23 @@ body {
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1em;
+  border: 1px solid #888;
 }
 
 .user, .bot {
   margin: 10px 0;
+  white-space: pre-wrap;
 }
 
 input[type="text"] {
-  width: 80%;
+  width: 75%;
   padding: 10px;
+  border-radius: 5px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1em;
+  border: 1px solid #ccc;
 }
 
 button {
@@ -37,4 +58,12 @@ button {
   border: none;
   color: white;
   cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1em;
+}
+
+#audio-control {
+  margin-top: 10px;
+  background-color: #444;
 }
