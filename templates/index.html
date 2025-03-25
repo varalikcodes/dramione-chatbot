@@ -5,6 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dramione Chatbot</title>
   <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    body {
+      background-image: url("/static/images/harry_potter_background.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Georgia', serif;
+      color: #f0f0f0;
+    }
+
+    .chat-container {
+      background-color: rgba(47, 47, 79, 0.85);
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #00000088;
+    }
+
+    #chatbox {
+      height: 400px;
+      overflow-y: scroll;
+      background-color: #3a3a5c;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .user, .bot {
+      margin: 10px 0;
+    }
+
+    input[type="text"] {
+      width: 75%;
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #a782ec;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #audio-control {
+      margin-top: 10px;
+      background-color: #444;
+    }
+  </style>
 </head>
 <body>
   <div class="chat-container">
@@ -14,11 +67,34 @@
       <input type="text" id="message" placeholder="Ask me anything in the Dramione universe..." required />
       <button type="submit">Send</button>
     </form>
+    <button id="audio-control">🔇 Sound On</button>
   </div>
+
+  <!-- Background music -->
+  <audio id="bg-music" loop>
+    <source src="/static/audio/harry_potter_theme.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
   <script>
     const chatForm = document.getElementById("chat-form");
     const chatbox = document.getElementById("chatbox");
+    const audio = document.getElementById("bg-music");
+    const audioControl = document.getElementById("audio-control");
+
+    let isPlaying = false;
+
+    audioControl.addEventListener("click", () => {
+      if (!isPlaying) {
+        audio.play();
+        audioControl.textContent = "🔊 Sound Off";
+        isPlaying = true;
+      } else {
+        audio.pause();
+        audioControl.textContent = "🔇 Sound On";
+        isPlaying = false;
+      }
+    });
 
     chatForm.addEventListener("submit", async (e) => {
       e.preventDefault();
