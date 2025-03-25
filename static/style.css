@@ -11,7 +11,7 @@ body {
 
 h1 {
   text-align: center;
-  font-family: 'Uncial Antiqua', cursive;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 2.5em;
   margin-bottom: 20px;
   text-shadow: 2px 2px 5px #000;
@@ -57,25 +57,19 @@ h1 {
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 1.1em;
   border: 1px solid #888;
   box-shadow: inset 0 0 5px #00000088;
+  color: black;
 }
 
-.user {
-  color: black;
+.user, .bot {
   margin: 10px 0;
   white-space: pre-wrap;
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.3em;
-}
-
-.bot {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1em;
   color: black;
-  margin: 10px 0;
-  white-space: pre-wrap;
-  font-family: 'Cedarville Cursive', cursive;
-  font-size: 1.2em;
 }
 
 input[type="text"] {
