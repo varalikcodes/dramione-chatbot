@@ -116,3 +116,15 @@ button {
   margin-top: 10px;
   background-color: #444;
 }
+
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  color: #ccc;
+  padding: 15px 0;
+  font-family: 'Cormorant Garamond', serif;
+  background-color: rgba(0, 0, 0, 0.4);
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
