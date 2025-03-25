@@ -5,36 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dramione Chatbot</title>
 
-  <!-- Google Fonts for magical vibe -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
-  <!-- Link to external CSS -->
+  <!-- CSS -->
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
   <div class="chat-container">
     <h1>✨ Dramione Chatbot ✨</h1>
+
+    <!-- 🌟 Conversation Starter Buttons -->
+    <div id="starter-buttons">
+      <button class="starter" data-msg="Roleplay as Hermione Granger during her 7th year at Hogwarts.">🎓 Roleplay as Hermione</button>
+      <button class="starter" data-msg="Roleplay as Draco Malfoy, brooding and complex, during the post-war era.">🖤 Roleplay as Draco</button>
+      <button class="starter" data-msg="Generate a Dramione fanfiction where they are forced to share a room as Head Girl and Head Boy.">📜 Generate a Dramoine fanfiction about...</button>
+    </div>
+
+    <!-- 📝 Chatbox -->
     <div id="chatbox"></div>
 
+    <!-- 💬 Chat Input -->
     <form id="chat-form">
       <input type="text" id="message" placeholder="Ask me anything in the Dramione universe..." required />
       <button type="submit">Send</button>
     </form>
 
+    <!-- 🎵 Music Control -->
     <button id="audio-control">🔇 Sound On</button>
   </div>
 
-  <!-- Background music -->
+  <!-- Audio -->
   <audio id="bg-music" loop>
     <source src="/static/audio/harry_potter_theme.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
+  <!-- JS -->
   <script>
     const chatForm = document.getElementById("chat-form");
     const chatbox = document.getElementById("chatbox");
+    const input = document.getElementById("message");
     const audio = document.getElementById("bg-music");
     const audioControl = document.getElementById("audio-control");
+    const starterButtons = document.querySelectorAll(".starter");
+    const starterContainer = document.getElementById("starter-buttons");
 
     let isPlaying = false;
 
@@ -50,11 +65,32 @@
       }
     });
 
+    // Typing animation
+    async function typeWriterEffect(text, container, className) {
+      const div = document.createElement("div");
+      div.classList.add(className);
+      container.appendChild(div);
+      
+      for (let i = 0; i < text.length; i++) {
+        div.textContent += text.charAt(i);
+        await new Promise(resolve => setTimeout(resolve, 30));
+      }
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Handle starter buttons
+    starterButtons.forEach(button => {
+      button.addEventListener("click", async () => {
+        const msg = button.dataset.msg;
+        input.value = msg;
+        starterContainer.style.display = "none"; // hide buttons after click
+        chatForm.requestSubmit();
+      });
+    });
+
     chatForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const input = document.getElementById("message");
       const message = input.value;
-
       chatbox.innerHTML += `<div class="user"><strong>You:</strong> ${message}</div>`;
       input.value = "";
 
@@ -67,19 +103,6 @@
       const data = await res.json();
       await typeWriterEffect(`Dramione Bot: ${data.reply}`, chatbox, "bot");
     });
-
-    async function typeWriterEffect(text, container, className) {
-      const div = document.createElement("div");
-      div.classList.add(className);
-      container.appendChild(div);
-      
-      for (let i = 0; i < text.length; i++) {
-        div.textContent += text.charAt(i);
-        await new Promise(resolve => setTimeout(resolve, 30)); // delay per letter
-      }
-      
-      container.scrollTop = container.scrollHeight;
-    }
   </script>
 </body>
 </html>
