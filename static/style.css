@@ -72,6 +72,26 @@ h1 {
   color: black;
 }
 
+.instructions-block {
+  color: black;
+  font-family: 'Cormorant Garamond', serif;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-size: 1.05em;
+  line-height: 1.6em;
+  box-shadow: inset 0 0 5px #00000022;
+}
+
+.instructions-block ul {
+  padding-left: 20px;
+}
+
+.instructions-block li {
+  margin-bottom: 6px;
+}
+
 input[type="text"] {
   width: 75%;
   padding: 10px;
