@@ -4,69 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dramione Chatbot</title>
+
+  <!-- Google Fonts for magical vibe -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
+  <!-- Link to external CSS -->
   <link rel="stylesheet" href="/static/style.css" />
-  <style>
-    body {
-      background-image: url("/static/images/harry_potter_background.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      height: 100vh;
-      margin: 0;
-      font-family: 'Georgia', serif;
-      color: #f0f0f0;
-    }
-
-    .chat-container {
-      background-color: rgba(47, 47, 79, 0.85);
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px #00000088;
-    }
-
-    #chatbox {
-      height: 400px;
-      overflow-y: scroll;
-      background-color: #3a3a5c;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-
-    .user, .bot {
-      margin: 10px 0;
-    }
-
-    input[type="text"] {
-      width: 75%;
-      padding: 10px;
-    }
-
-    button {
-      padding: 10px;
-      background-color: #a782ec;
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    #audio-control {
-      margin-top: 10px;
-      background-color: #444;
-    }
-  </style>
 </head>
 <body>
   <div class="chat-container">
     <h1>✨ Dramione Chatbot ✨</h1>
     <div id="chatbox"></div>
+
     <form id="chat-form">
       <input type="text" id="message" placeholder="Ask me anything in the Dramione universe..." required />
       <button type="submit">Send</button>
     </form>
+
     <button id="audio-control">🔇 Sound On</button>
   </div>
 
@@ -111,9 +65,21 @@
       });
 
       const data = await res.json();
-      chatbox.innerHTML += `<div class="bot"><strong>Dramione Bot:</strong> ${data.reply}</div>`;
-      chatbox.scrollTop = chatbox.scrollHeight;
+      await typeWriterEffect(`Dramione Bot: ${data.reply}`, chatbox, "bot");
     });
+
+    async function typeWriterEffect(text, container, className) {
+      const div = document.createElement("div");
+      div.classList.add(className);
+      container.appendChild(div);
+      
+      for (let i = 0; i < text.length; i++) {
+        div.textContent += text.charAt(i);
+        await new Promise(resolve => setTimeout(resolve, 30)); // delay per letter
+      }
+      
+      container.scrollTop = container.scrollHeight;
+    }
   </script>
 </body>
 </html>
