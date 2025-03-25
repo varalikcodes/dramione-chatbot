@@ -6,7 +6,7 @@
   <title>Dramione Chatbot</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Uncial+Antiqua&family=Zeyada&family=Homemade+Apple&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Cormorant+Garamond:wght@500&family=Dancing+Script&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="/static/style.css" />
@@ -15,33 +15,32 @@
   <div class="chat-container">
     <h1>✨ Dramione Chatbot ✨</h1>
 
-    <!-- Roleplay Buttons -->
+    <!-- Starter Buttons -->
     <div id="starter-buttons">
-      <button class="starter" data-msg="I want to roleplay as Hermione Granger. Please respond as if this is a story, and you are writing Draco's part.">🎓 Roleplay as Hermione</button>
-      <button class="starter" data-msg="I want to roleplay as Draco Malfoy. Please respond as if this is a story, and you are writing Hermione's part.">🖤 Roleplay as Draco</button>
-      <button class="starter" data-msg="Generate a random Dramoine fanfiction.">📜 Generate a Dramoine fanfiction about...</button>
+      <button class="starter" data-msg="Let's roleplay. I will be Hermione. Please respond as Draco, in-character, like we're having a conversation.">🎓 Roleplay as Hermione</button>
+      <button class="starter" data-msg="Let's roleplay. I will be Draco. Please respond as Hermione, in-character, like we're having a conversation.">🖤 Roleplay as Draco</button>
+      <button class="starter" data-msg="Generate a short Dramione scene where they're forced to be partners for a Hogwarts project.">📜 Generate a Dramoine scene...</button>
     </div>
 
     <!-- Chatbox -->
     <div id="chatbox"></div>
 
-    <!-- Chat Form -->
+    <!-- Input -->
     <form id="chat-form">
-      <input type="text" id="message" placeholder="Ask me anything in the Dramione universe..." required />
+      <input type="text" id="message" placeholder="Talk to Draco or Hermione..." required />
       <button type="submit">Send</button>
     </form>
 
-    <!-- Audio Toggle -->
+    <!-- Music -->
     <button id="audio-control">🔇 Sound On</button>
   </div>
 
-  <!-- Background Music -->
+  <!-- Music Player -->
   <audio id="bg-music" loop>
     <source src="/static/audio/harry_potter_theme.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
-  <!-- JavaScript -->
   <script>
     const chatForm = document.getElementById("chat-form");
     const chatbox = document.getElementById("chatbox");
@@ -72,12 +71,11 @@
       
       for (let i = 0; i < text.length; i++) {
         div.textContent += text.charAt(i);
-        await new Promise(resolve => setTimeout(resolve, 30));
+        await new Promise(resolve => setTimeout(resolve, 20));
       }
       container.scrollTop = container.scrollHeight;
     }
 
-    // Roleplay buttons
     starterButtons.forEach(button => {
       button.addEventListener("click", async () => {
         const msg = button.dataset.msg;
@@ -100,7 +98,7 @@
       });
 
       const data = await res.json();
-      await typeWriterEffect(`Dramione Bot: ${data.reply}`, chatbox, "bot");
+      await typeWriterEffect(`${data.reply}`, chatbox, "bot");
     });
   </script>
 </body>
