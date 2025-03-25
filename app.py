@@ -4,10 +4,10 @@ import os
 
 app = Flask(__name__)
 
-# Get your API key from environment variable
+# Load your OpenAI API key from environment variable
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Dramione system prompt
+# System prompt for Dramione chatbot
 system_prompt = """
 You are a fanfiction assistant specialized in Draco and Hermione (Dramione) fanfiction.
 All your responses must stay within the Dramione universe.
@@ -23,6 +23,9 @@ def index():
 @app.route("/chat", methods=["POST"])
 def chat():
     user_input = request.json.get("message")
+    
+    if not user_input:
+        return jsonify({"reply": "I need something to respond to, love. Even Malfoy has better conversation than silence."})
 
     messages = [
         {"role": "system", "content": system_prompt},
@@ -31,15 +34,19 @@ def chat():
 
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-3.5-turbo",  # You can use "gpt-4" if you have access
             messages=messages,
-            temperature=0.8,
+            temperature=0.8
         )
         reply = response["choices"][0]["message"]["content"]
         return jsonify({"reply": reply})
 
     except Exception as e:
-        return jsonify({"reply": "Something went wrong. Maybe a rogue Niffler got into the server?"})
+        # Log the actual error in the backend logs for debugging
+        print(f"🔴 Error communicating with OpenAI: {str(e)}")
+        return jsonify({
+            "reply": "Something went wrong. Maybe a rogue Niffler got into the server?"
+        })
 
 if __name__ == "__main__":
     app.run(debug=True)
